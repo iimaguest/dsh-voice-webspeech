@@ -1,7 +1,7 @@
 # dsh-voice-webspeech
 
 [![GitHub](https://img.shields.io/badge/GitHub-anweat%2Fdsh--voice--webspeech-24292e?logo=github)](https://github.com/anweat/dsh-voice-webspeech)
-[![DSH](https://img.shields.io/badge/DSH-%3E%3D0.1.0--rc.3%20%3C0.2.0-5b8def)](https://github.com/deepseek-ai/deepseek-harness)
+[![DSH](https://img.shields.io/badge/DSH-%3E%3D0.1.0--rc.3-5b8def)](https://github.com/deepseek-ai/deepseek-harness)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 DSH Web GUI 的**浏览器语音输入**插件：默认零服务端、零 API Key、零模型下载、零 Python，
@@ -32,10 +32,18 @@ DSH Web GUI 的**浏览器语音输入**插件：默认零服务端、零 API Ke
 
 ## 兼容性
 
-- DSH：`>=0.1.0-rc.3 <0.2.0`（Profile Bundle + 嵌套 `dsh.client` 契约）
+- DSH：`>=0.1.0-rc.3`（含 `0.1.x` 与 `0.2.x`，`0.2.0-rc.1+` 自 v0.1.2 起；Profile Bundle + 嵌套 `dsh.client` 契约）
 - Node.js：`^22.19.0 || >=24.0.0`
 - 浏览器：需 Edge 或 Chrome（Web Speech API）；Firefox/Safari 不支持
 - 麦克风：浏览器需获得麦克风权限（首次使用会在地址栏请求授权）
+
+> **DSH 0.2 兼容说明（v0.1.2）**：DSH 0.2 移除了 `@deepseek-ai/dsh-client-runtime`（拆分为
+> store/connection/modules），本插件已将其从 peer 依赖、dev 依赖与 `dsh.client.inject` 中移除；
+> 其余五个 client 包的 peer 放宽为 `^0.1.1-rc.2 || ^0.2.0-rc.1`。客户端 bundle 运行时只依赖
+> `react`，宿主半部分为空操作（no-op），因此该改动不影响任何功能；仅有的源码改动是类型层：
+> `ClientContext` 改从 `@deepseek-ai/cordis` 引入，`ctx.slots` 的类型由
+> `@deepseek-ai/dsh-client-ui-renderer/client` 的类型增强提供（仅 dev 依赖，type-only import，
+> 不进入运行时依赖与客户端注入列表）。
 
 ## 安装
 
